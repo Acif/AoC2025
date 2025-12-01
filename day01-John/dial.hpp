@@ -42,28 +42,26 @@ void dial::rotate(char direction, int amount) {
 }
 
 void dial::rotateThrough(char direction, int amount) {
+    int addOrSub;
+    
     switch (direction) {
         case 'L':
-            for (int i = 0; i < amount; i++) {
-                this->posThrough = (this->posThrough - 1) % 100;
-
-                if (this->posThrough == 0) {
-                    this->zerosThrough++;
-                }
-            }
+            addOrSub = -1;
             break;
         case 'R':
-            for (int i = 0; i < amount; i++) {
-                this->posThrough = (this->posThrough + 1) % 100;
-
-                if (this->posThrough == 0) {
-                    this->zerosThrough++;
-                }
-            }
+            addOrSub = 1;
             break;
         default:
             break;
     }
+
+    for (int i = 0; i < amount; i++) {
+                this->posThrough = (this->posThrough + addOrSub) % 100;
+
+                if (this->posThrough == 0) {
+                    this->zerosThrough++;
+                }
+            }
 
     return;
 }

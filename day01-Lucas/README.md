@@ -13,7 +13,7 @@ The safe has a dial with positions 0-99. Starting at position 50, follow rotatio
 
 - `solution.c` - Main program
 - `Makefile` - Build configuration
-- `example.txt` - Example input from problem description
+- `input.txt` - Example input from problem description
 
 ## Build
 

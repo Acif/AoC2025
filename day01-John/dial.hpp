@@ -19,6 +19,8 @@ class dial {
 dial::dial() {
     this->pos = 50;
     this->zeros = 0;
+    this->posThrough = 50;
+    this->zerosThrough = 0;
     return;
 }
 

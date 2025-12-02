@@ -1,6 +1,8 @@
 #ifndef DIAL_HPP_
 #define DIAL_HPP_
 
+#include <iostream>
+
 class dial {
   private:
     int pos;
@@ -16,7 +18,7 @@ class dial {
     void rotateThrough(char, int);
 };
 
-dial::dial() {
+inline dial::dial() {
     this->pos = 50;
     this->zeros = 0;
     this->posThrough = 50;
@@ -24,12 +26,12 @@ dial::dial() {
     return;
 }
 
-dial::~dial() {
+inline dial::~dial() {
     std::cout << "Zeros: " << this->zeros << std::endl
               << "Zeros Through: " << this->zerosThrough << std::endl;
 }
 
-void dial::rotate(char direction, int amount) {
+inline void dial::rotate(char direction, int amount) {
     switch (direction) {
         case 'L':
             this->pos = (this->pos - amount) % 100;
@@ -52,7 +54,7 @@ enum Direction {
     LEFT = -1, RIGHT = 1
 };
 
-void dial::rotateThrough(char direction, int amount) {
+inline void dial::rotateThrough(char direction, int amount) {
     Direction d;
     
     switch (direction) {
@@ -75,7 +77,7 @@ void dial::rotateThrough(char direction, int amount) {
     return;
 }
 
-void test() {
+inline void test() {
     std::cout << "test" << std::endl;
 }
 

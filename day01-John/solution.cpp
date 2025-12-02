@@ -4,7 +4,7 @@
 #include "dial.hpp"
 
 int main() {
-    dial dial;
+    Dial dial;
     
     std::ifstream file("input.txt");
     std::string line;

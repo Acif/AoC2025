@@ -3,82 +3,43 @@
 
 #include <iostream>
 
-class dial {
-  private:
+class Dial {
+private:
     int pos;
     int posThrough;
-
-  public:
     int zeros;
     int zerosThrough;
 
-    dial();
-    ~dial();
-    void rotate(char, int);
-    void rotateThrough(char, int);
+public:
+    Dial() : pos(50), posThrough(50), zeros(0), zerosThrough(0) {}
+    ~Dial() {
+        std::cout << "Zeros: " << zeros << std::endl
+                  << "Zeros Through: " << zerosThrough << std::endl;
+    }
+
+    void rotate(char direction, int amount) {
+        switch (direction) {
+            case 'L':
+                pos = (pos - amount) % 100;
+                break;
+            case 'R':
+                pos = (pos + amount) % 100;
+                break;
+        }
+        if (pos == 0) {
+            zeros++;
+        }
+    }
+
+    void rotateThrough(char direction, int amount) {
+        int direction_multiplier = (direction == 'L') ? -1 : 1;
+        for (int i = 0; i < amount; i++) {
+            posThrough = (posThrough + direction_multiplier) % 100;
+            if (posThrough == 0) {
+                zerosThrough++;
+            }
+        }
+    }
 };
-
-inline dial::dial() {
-    this->pos = 50;
-    this->zeros = 0;
-    this->posThrough = 50;
-    this->zerosThrough = 0;
-    return;
-}
-
-inline dial::~dial() {
-    std::cout << "Zeros: " << this->zeros << std::endl
-              << "Zeros Through: " << this->zerosThrough << std::endl;
-}
-
-inline void dial::rotate(char direction, int amount) {
-    switch (direction) {
-        case 'L':
-            this->pos = (this->pos - amount) % 100;
-            break;
-        case 'R':
-            this->pos = (this->pos + amount) % 100;
-            break;
-        default:
-            break;
-    }
-
-    if (this->pos == 0) {
-        this->zeros++;
-    }
-
-    return;
-}
-
-enum Direction {
-    LEFT = -1, RIGHT = 1
-};
-
-inline void dial::rotateThrough(char direction, int amount) {
-    Direction d;
-    
-    switch (direction) {
-        case 'L':
-            d = LEFT;
-            break;
-        case 'R':
-            d = RIGHT;
-            break;
-        default:
-            break;
-    }
-
-    for (int i = 0; i < amount; i++) {
-        this->posThrough = (this->posThrough + d) % 100;
-
-        if (this->posThrough == 0) this->zerosThrough++;
-    }
-
-    return;
-}
-
-inline void test() {
-    std::cout << "test" << std::endl;
-}
 
 #endif

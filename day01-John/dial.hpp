@@ -5,15 +5,15 @@ class dial {
   private:
     int pos;
     int posThrough;
+
+  public:
     int zeros;
     int zerosThrough;
 
-  public:
     dial();
+    ~dial();
     void rotate(char, int);
     void rotateThrough(char, int);
-    int getZeros();
-    int getZerosThrough();
 };
 
 dial::dial() {
@@ -22,6 +22,11 @@ dial::dial() {
     this->posThrough = 50;
     this->zerosThrough = 0;
     return;
+}
+
+dial::~dial() {
+    std::cout << "Zeros: " << this->zeros << std::endl
+              << "Zeros Through: " << this->zerosThrough << std::endl;
 }
 
 void dial::rotate(char direction, int amount) {
@@ -43,37 +48,35 @@ void dial::rotate(char direction, int amount) {
     return;
 }
 
+enum Direction {
+    LEFT = -1, RIGHT = 1
+};
+
 void dial::rotateThrough(char direction, int amount) {
-    int addOrSub;
+    Direction d;
     
     switch (direction) {
         case 'L':
-            addOrSub = -1;
+            d = LEFT;
             break;
         case 'R':
-            addOrSub = 1;
+            d = RIGHT;
             break;
         default:
             break;
     }
 
     for (int i = 0; i < amount; i++) {
-                this->posThrough = (this->posThrough + addOrSub) % 100;
+        this->posThrough = (this->posThrough + d) % 100;
 
-                if (this->posThrough == 0) {
-                    this->zerosThrough++;
-                }
-            }
+        if (this->posThrough == 0) this->zerosThrough++;
+    }
 
     return;
 }
 
-int dial::getZeros() {
-    return this->zeros;
-}
-
-int dial::getZerosThrough() {
-    return this->zerosThrough;
+void test() {
+    std::cout << "test" << std::endl;
 }
 
 #endif

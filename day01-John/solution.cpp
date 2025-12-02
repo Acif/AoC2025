@@ -15,7 +15,6 @@ int main() {
 
         while (std::getline(file, line)) {
             rotationDirection = line.at(0);
-
             rotationAmount = std::stoi(line.substr(1, line.size()));
 
             dial.rotate(rotationDirection, rotationAmount);
@@ -26,9 +25,6 @@ int main() {
     } else {
         std::cerr << "Unable to open file!" << std::endl;
     }
-
-    std::cout << "Zeros: " << dial.getZeros() << std::endl
-              << "Zeros Through: " << dial.getZerosThrough() << std::endl;
 
     return 0;
 }

@@ -70,8 +70,8 @@ void solve(std::vector<Range> rangeList, int part) {
     }
 
     uint64_t sum = 0;
-
     uint64_t lowTemp, highTemp;
+    
     for (auto x : rangeList) {
         // Cast x.low and x.high to uint64_t (long long)
         lowTemp = std::stoll(x.low);

@@ -48,7 +48,7 @@ int findLargestJolt(std::string input) {
     }
 
     // If both digits are actually in the string, they pass this check, and are passed to forward
-    if (input.find(firstDigit) != std::string::npos) firstPasses = true;
+    if (input.find(firstDigit) != std::string::npos) firstPasses = true; 
     if (input.find(secondDigit) != std::string::npos) secondPasses = true;
 
     std::string forward = "";

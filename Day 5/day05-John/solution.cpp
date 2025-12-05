@@ -2,6 +2,7 @@
 #include <fstream>
 #include <vector>
 #include <bits/stdc++.h>
+#include <vector>
 #define DEBUG 0
 
 struct Range {
@@ -72,6 +73,7 @@ int main() {
     std::cout << std::endl;
     #endif
 
+    auto start = std::chrono::high_resolution_clock::now();
     int freshIDs = 0;
     for (int i = 0; i < ids.size(); i++) {
         bool fresh = false;
@@ -84,9 +86,9 @@ int main() {
             }
         }
     }
- 
-    std::cout << "Fresh IDs: " << freshIDs << std::endl;
+    auto stop = std::chrono::high_resolution_clock::now();
 
+    auto start2 = std::chrono::high_resolution_clock::now();
     long long freshRanges = 0;
     while (concatenateRanges(ranges) != 0) continue;
     for (Range r : ranges) {
@@ -96,24 +98,25 @@ int main() {
 
         freshRanges += r.high - r.low + 1;
     }
+    auto stop2 = std::chrono::high_resolution_clock::now();
 
-    std::cout << "Fresh Ranges:  " << freshRanges << std::endl;
+    std::cout << "Fresh IDs: " << freshIDs << std::endl;
+    std::cout << "Fresh Ranges:  " << freshRanges << std::endl << std::endl;
+
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+    auto duration2 = std::chrono::duration_cast<std::chrono::microseconds>(stop2 - start2);
+
+    std::cout << "Part One Duration: " << duration.count() << " Microseconds" << std::endl
+              << "Part Two Duration: " << duration2.count() << " Microseconds" << std::endl;
 
     return 0;
 }
 
 int concatenateRanges(std::vector<Range> &ranges) {
     int startingLength = ranges.size();
-
-    if (startingLength == 1) {
-        return 0;
-    }
-    
     std::vector<Range> newRanges;
 
     for (Range r1 : ranges) {
-        int low = 0;
-        int high = 0;
         bool found = false;
         for (Range r2 : ranges) {
             if (r1.low == r2.low && r1.high == r2.high) {

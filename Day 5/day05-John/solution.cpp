@@ -112,7 +112,6 @@ int concatenateRanges(std::vector<Range> &ranges) {
     std::vector<Range> newRanges;
 
     for (Range r1 : ranges) {
-        // 16-20     12-18
         int low = 0;
         int high = 0;
         bool found = false;

@@ -2,7 +2,9 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#define DEBUG 0
+
+int checkRolls(std::vector<std::vector<char>>&);
+int total = 0;
 
 int main() {
     std::ifstream file("input.txt");
@@ -39,9 +41,18 @@ int main() {
     } else {
         std::cerr << "Error opening file!" << std::endl;
     }
-
     vec.push_back(endcap);
+
+    while (checkRolls(vec) != 0) continue;
+
+    std::cout << "Total: " << total << std::endl;
+
+    return 0;
+}
+
+int checkRolls(std::vector<std::vector<char>> &vec) {
     std::vector<std::vector<char>> duplicate = vec;
+    int sum = 0;
 
     for (int i = 1; i < vec.size()-1; i++) {
         for (int j = 1; j < vec[i].size()-1; j++) {
@@ -60,21 +71,13 @@ int main() {
 
                 if (count < 4) {
                     sum++;
+                    duplicate[i][j] = '.';
                 }
             }
         }
     }
 
-    #if DEBUG
-    for (std::vector v : duplicate) {
-        for (char c : v) {
-            std::cout << c;
-        }
-        std::cout << std::endl;
-    }
-    #endif
-
-    std::cout << "Sum: " << sum << std::endl;
-
-    return 0;
+    vec = duplicate;
+    total += sum;
+    return sum;
 }
